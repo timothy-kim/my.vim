@@ -42,6 +42,11 @@ filetype plugin on
 filetype indent on
 
 
+"NERDTree
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
 " MACROS
 
 "trim all lines
@@ -103,7 +108,10 @@ autocmd FileType html set formatoptions+=tl
 
 " for both CSS and HTML, use genuine tab characters for indentation, to make
 " files a few bytes smaller:
-autocmd FileType html,css set noexpandtab tabstop=4
+autocmd FileType html,css set shiftwidth=2
+autocmd FileType html,css set softtabstop=2
+autocmd FileType html,css set tabstop=2
+
 
 " in makefiles, don't expand tabs to spaces, since actual tab characters are
 " needed, and have indentation at 8 chars to be sure that all indents are tabs

@@ -2,6 +2,7 @@
 call pathogen#infect()
 
 
+
 set number
 set shiftwidth=4
 set softtabstop=4
@@ -26,13 +27,16 @@ if has("gui_running")
     set guioptions-=T "no toolbar for gui
 "    set guifont=Monoco:h9
     set antialias
-    set lines=60
-    set columns=80
+"    set lines=60
+"    set columns=80
     colorscheme wombat
     if has("gui_gtk2")
+        "linux
     elseif has("gui_win32")
+        "windows
         set guifont=Consolas:h10
     else
+        "mac
         set transparency=10
         set guifont=Consolas:h10
     endif
@@ -42,17 +46,27 @@ filetype plugin on
 filetype indent on
 
 
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+" Open vimrc in the new tab
+let mapleader = ","
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
+
 "NERDTree
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 
 " MACROS
-
 "trim all lines
 map <F3> :%s/^\s\+//g<CR>
 map <F4> :%s/\s\+$//g<CR>
 map <F5> :%s/^\s\+//g<CR>:%s/\s\+$//g<CR>
+
 
 
 "Latex stuff

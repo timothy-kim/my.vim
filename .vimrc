@@ -1,7 +1,23 @@
-"load pathogen
-call pathogen#infect()
+set nocompatible
+
+"Vundle
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+""" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/nerdtree'
+Bundle 'pangloss/vim-javascript'
+Bundle 'jistr/vim-nerdtree-tabs'
 
 
+filetype plugin indent on
 
 set number
 set shiftwidth=4
@@ -14,21 +30,31 @@ set autoindent
 set showmatch
 set vb t_vb= "no beeping
 set ruler
-set nocompatible
 set cmdheight=2
 set hlsearch
 
 "window movement, get rid of ctrl+w
-nnoremap k gk
-nnoremap j gj
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+
+"precision cursor movement using cursor keys
+imap <up> <C-O>gk
+imap <down> <C-O>gj
+nmap <up> gk
+nmap <down> gj
+vmap <up> gk
+vmap <down> gj
 
 
 if has("gui_running")
     set guioptions-=T "no toolbar for gui
-"    set guifont=Monoco:h9
     set antialias
-"    set lines=60
-"    set columns=80
+
+    autocmd vimenter * if argc() | set lines=50 | set columns=85 | else | set lines=999 | set columns=999 | endif
+
     colorscheme wombat
     if has("gui_gtk2")
         "linux
@@ -41,9 +67,6 @@ if has("gui_running")
         set guifont=Consolas:h10
     endif
 endif
-
-filetype plugin on
-filetype indent on
 
 
 " Source the vimrc file after saving it
@@ -58,7 +81,11 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 
 "NERDTree
 " close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"  this is now set by NERDTree tabs
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+"NERDTree Tabs open only when opening a directory
+autocmd vimenter * if argc() | let g:nerdtree_tabs_open_on_gui_startup=0 | endif
 
 
 " MACROS

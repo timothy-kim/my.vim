@@ -3,6 +3,7 @@ set nocompatible
 "Vundle
 filetype off
 
+"vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -15,7 +16,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'pangloss/vim-javascript'
 Bundle 'jistr/vim-nerdtree-tabs'
-
+Bundle 'derekwyatt/vim-scala'
 
 filetype plugin indent on
 
@@ -49,11 +50,15 @@ vmap <up> gk
 vmap <down> gj
 
 
+
 if has("gui_running")
     set guioptions-=T "no toolbar for gui
     set antialias
 
-    autocmd vimenter * if argc() | set lines=50 | set columns=85 | else | set lines=999 | set columns=999 | endif
+    "autocmd vimenter * if argc() | set lines=50 | set columns=85 | else | set lines=999 | set columns=999 | endif
+
+    set lines=50
+    set columns=85
 
     colorscheme wombat
     if has("gui_gtk2")
@@ -79,22 +84,14 @@ let mapleader = ","
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 
-"NERDTree
-" close vim if the only window left open is a NERDTree
-"  this is now set by NERDTree tabs
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-"NERDTree Tabs open only when opening a directory
-autocmd vimenter * if argc() | let g:nerdtree_tabs_open_on_gui_startup=0 | endif
-
+"Don't open nerdtree on startup
+let g:nerdtree_tabs_open_on_gui_startup=0 
 
 " MACROS
 "trim all lines
 map <F3> :%s/^\s\+//g<CR>
 map <F4> :%s/\s\+$//g<CR>
 map <F5> :%s/^\s\+//g<CR>:%s/\s\+$//g<CR>
-
-
 
 "Latex stuff
 " IMPORTANT: grep will sometimes skip displaying the file name if you
@@ -112,7 +109,7 @@ let g:Tex_ViewRule_dvi='open'
 
 
 " Use the same symbols as TextMate for tabstops and EOLs
-" doesn't seem to work :(
+set list!
 set listchars=tab:▸\ ,eol:¬
 
 "some of the settings are from http://www.stripey.com/vim/vimrc.html
@@ -125,9 +122,6 @@ endif
 " display the current mode and partially-typed commands in the status line:
 set showmode
 set showcmd
-
-" enable filetype detection:
-filetype on
 
 " for C-like programming, have automatic indentation:
 autocmd FileType c,cpp,slang set cindent
@@ -147,12 +141,11 @@ autocmd FileType css set smartindent
 " alone when editing:
 autocmd FileType html set formatoptions+=tl
 
-" for both CSS and HTML, use genuine tab characters for indentation, to make
-" files a few bytes smaller:
-autocmd FileType html,css set shiftwidth=2
-autocmd FileType html,css set softtabstop=2
-autocmd FileType html,css set tabstop=2
-
+" for both CSS and HTML, use genuine tab characters for indentation, to make files a few bytes smaller:
+" No longer needed, because we are minifying them anyways.
+"autocmd FileType html,css set shiftwidth=2
+"autocmd FileType html,css set softtabstop=2
+"autocmd FileType html,css set tabstop=2
 
 " in makefiles, don't expand tabs to spaces, since actual tab characters are
 " needed, and have indentation at 8 chars to be sure that all indents are tabs
@@ -185,6 +178,5 @@ inoremap <S-Tab> <C-D>
 autocmd FileType html,xml,tex,mail set spell
 
 "lilypond
-"set runtimepath+=/Applications/LilyPond.app/Contents/Resources/share/lilypond/current/vim
-
+set runtimepath+=/Applications/LilyPond.app/Contents/Resources/share/lilypond/current/vim
 

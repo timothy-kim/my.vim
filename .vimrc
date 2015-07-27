@@ -4,22 +4,30 @@ set nocompatible
 filetype off
 
 "vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " let Vundle manage Vundle
 """ required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-" My Bundles
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
-Bundle 'pangloss/vim-javascript'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'wincent/Command-T'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'othree/html5.vim'
+" My Plugins
+
+"Integration
+Plugin 'tpope/vim-fugitive'
+
+"Navigation
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'wincent/Command-T'
+
+"Language support
+Plugin 'pangloss/vim-javascript'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'othree/html5.vim'
+
+call vundle#end()
 
 filetype plugin indent on
 
@@ -50,7 +58,6 @@ map <C-l> <C-w>l
 set splitbelow
 set splitright
 
-
 "precision cursor movement using cursor keys
 imap <up> <C-O>gk
 imap <down> <C-O>gj
@@ -58,7 +65,6 @@ nmap <up> gk
 nmap <down> gj
 vmap <up> gk
 vmap <down> gj
-
 
 
 if has("gui_running")
@@ -85,13 +91,13 @@ endif
 
 
 " Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+"if has("autocmd")
+"  autocmd bufwritepost .vimrc source $MYVIMRC
+"endif
 
 " Open vimrc in the new tab
-let mapleader = ","
-nmap <leader>v :tabedit $MYVIMRC<CR>
+"let mapleader = ","
+"nmap <leader>v :tabedit $MYVIMRC<CR>
 
 
 "Don't open nerdtree on startup
@@ -182,5 +188,5 @@ inoremap <S-Tab> <C-D>
 autocmd FileType html,xml,tex,mail set spell
 
 "lilypond
-set runtimepath+=/Applications/LilyPond.app/Contents/Resources/share/lilypond/current/vim
+"set runtimepath+=/Applications/LilyPond.app/Contents/Resources/share/lilypond/current/vim
 

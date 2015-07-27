@@ -17,6 +17,9 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'pangloss/vim-javascript'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'wincent/Command-T'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'othree/html5.vim'
 
 filetype plugin indent on
 
@@ -34,11 +37,18 @@ set ruler
 set cmdheight=2
 set hlsearch
 
+"CommandT
+nnoremap <silent> <C-t> :CommandT<CR>
+
+
 "window movement, get rid of ctrl+w
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+set splitbelow
+set splitright
 
 
 "precision cursor movement using cursor keys
@@ -140,12 +150,6 @@ autocmd FileType css set smartindent
 " for HTML, generally format text, but if a long line has been created leave it
 " alone when editing:
 autocmd FileType html set formatoptions+=tl
-
-" for both CSS and HTML, use genuine tab characters for indentation, to make files a few bytes smaller:
-" No longer needed, because we are minifying them anyways.
-"autocmd FileType html,css set shiftwidth=2
-"autocmd FileType html,css set softtabstop=2
-"autocmd FileType html,css set tabstop=2
 
 " in makefiles, don't expand tabs to spaces, since actual tab characters are
 " needed, and have indentation at 8 chars to be sure that all indents are tabs
